@@ -46,6 +46,17 @@ public class SwerveSubsystem extends SubsystemBase {
         }
 
         SwerveDriveTelemetry.verbosity = TelemetryVerbosity.NONE;
+        swerveDrive.setHeadingCorrection(false);
+        swerveDrive.setAngularVelocityCompensation(
+            true, 
+            true, 
+            0.1
+            );
+        swerveDrive.setCosineCompensator(!SwerveDriveTelemetry.isSimulation);
+        swerveDrive.setModuleEncoderAutoSynchronize(true, 1);
+        //swerveDrive.pushOffsetsToEncoders();
+        swerveDrive.setMaximumAllowableSpeeds(Constants.SWERVE_MAXIMUM_SPEED.in(MetersPerSecond), Constants.SWERVE_MAXIMUM_ANGULAR_VELOCITY);
+        
     }
 
     /**
